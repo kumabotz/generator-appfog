@@ -26,4 +26,4 @@ manually adjust your build step for this to work comfortably.
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
 ## Inspiration
-[generator-heroku](https://github.com/passy/generator-heroku) by @passy
+[generator-heroku](https://github.com/passy/generator-heroku) by [@passy](https://github.com/passy)
