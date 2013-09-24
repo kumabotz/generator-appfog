@@ -16,7 +16,7 @@ manually adjust your build step for this to work comfortably.
     `npm install -g yo`
 - Install the generator: `npm install -g generator-appfog`
 - Make sure you are in the root of your existing Yeoman application.
-- Run: `yo heroku`
+- Run: `yo appfog`
 
 ## Options
 
