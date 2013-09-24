@@ -3,7 +3,7 @@
 
 var path = require('path');
 var fs = require('fs');
-var helper = require('yeoman-generator').test;
+var helpers = require('yeoman-generator').test;
 
 describe('appfog generator', function() {
   beforeEach(function(done) {
