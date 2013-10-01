@@ -1,6 +1,6 @@
 {
   "name": "generator-appfog",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An appfog setup generator for Yeoman",
   "keywords": [
     "yeoman-generator"
