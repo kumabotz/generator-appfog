@@ -2,8 +2,8 @@
     dist: {
       files: [{
         expand: true,
-        dest: '<%= yeoman.dist %>',
         cwd: 'appfog',
+        dest: '<%= yeoman.dist %>',
         src: '*',
         rename: function (dest, src) {
           var path = require('path');
