@@ -72,6 +72,6 @@ AppfogGenerator.prototype.rewiregrunt = function rewiregrunt() {
 AppfogGenerator.prototype.gitsetup = function gitsetup() {
   console.log(
     chalk.green('You\'re all set! Now go to ' + chalk.bold(this.distDir) +
-        ' and run\n\t') + chalk.bold('af push')
+        ' and run\n\t') + chalk.bold('npm install && af push')
   );
 }
