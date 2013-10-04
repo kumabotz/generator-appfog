@@ -62,7 +62,6 @@ AppfogGenerator.prototype.distpackage = function distpackage() {
 
 AppfogGenerator.prototype.rewiregrunt = function rewiregrunt() {
   var template = this.readFileAsString(path.join(__dirname, 'templates', 'copytemplate.js'));
-
   console.log(
     chalk.yellow('Please add this copy task rule to your Gruntfile: \n') +
     template
