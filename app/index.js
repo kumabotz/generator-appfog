@@ -25,14 +25,10 @@ util.inherits(AppfogGenerator, yeoman.generators.Base);
 
 AppfogGenerator.prototype.checkInstallation = function checkInstallation() {
   var done = this.async();
-
-  this.appfogInstalled = false;
   exec('af --version', function (err) {
     if (err) {
       this.log.error('You don\'t have the AppFog command line tool installed. ' +
-          'Grab it from https://docs.appfog.com/getting-started/af-cli');
-    } else {
-      this.appfogInstalled = true;
+          'Grab it from https://docs.appfog.com/getting-started/af-cli\n' + err);
     }
     done();
   }.bind(this));
