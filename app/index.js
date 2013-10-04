@@ -7,6 +7,10 @@ var chalk = require('chalk');
 var exec = require('child_process').exec;
 var fs = require('fs');
 
+function oneline(str) {
+  return str.replace(/\n/g, '');
+}
+
 var AppfogGenerator = module.exports = function AppfogGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
