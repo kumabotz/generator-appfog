@@ -3,12 +3,13 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
+var async = require('async');
 var chalk = require('chalk');
 var exec = require('child_process').exec;
 var fs = require('fs');
 
 function oneline(str) {
-  return str.replace(/\n/g, '');
+  return str.replace(/\n/g, '\\n');
 }
 
 var AppfogGenerator = module.exports = function AppfogGenerator(args, options, config) {
@@ -62,31 +63,35 @@ AppfogGenerator.prototype.distpackage = function distpackage() {
 
 AppfogGenerator.prototype.gitignore = function gitignore() {
   var file = '.gitignore';
-
-  function append(file, text) {
-    fs.appendFile(file, text, function (err) {
-      text = oneline(text);
-      if (err) {
-        this.log.error('Cannot append \'' + text + '\' into ' + file + '\n' + err);
-        return;
-      }
-      console.log(chalk.green('  append ') + chalk.bold('\'' + text +
-          '\' into ' + file));
-    }.bind(this));
-  }
-
   if (fs.existsSync(file)) {
-    fs.readFile(file, { encoding: 'utf-8' }, function (err, data) {
+    var done = this.async();
+    async.waterfall([
+      function (callback) {
+        fs.readFile(file, { encoding: 'utf-8' }, function (err, data) {
+          callback(err, data);
+        });
+      },
+      function (data, callback) {
+        if (String(data).match(/^appfog[\/\n]?$/m) === null) {
+          var text = '\nappfog/\n';
+          fs.appendFile(file, text, function (err, data) {
+            console.log(chalk.green('  append ') + chalk.bold('\'' +
+                oneline(text) + '\' into ' + file));
+            callback(err, data);
+          });
+        } else {
+          callback(null, data);
+        }
+      }
+    ], function (err, data) {
       if (err) {
-        this.log('Cannot open ' + file + ' for read\n' + err);
+        this.log.error('' + err);
         return;
       }
-      if (String(data).match(/^appfog[\/\n]?$/m) === null) {
-        append(file, 'appfog/\n');
-      }
+      done();
     }.bind(this));
   } else {
-    append(file, 'appfog/\n');
+    this.write(file, 'appfog/\n');
   }
 }
 
