@@ -8,7 +8,7 @@ var exec = require('child_process').exec;
 var fs = require('fs');
 
 function oneline(str) {
-  return str.replace(/\n/g, '');
+  return str.replace(/\n/g, '\\n');
 }
 
 var AppfogGenerator = module.exports = function AppfogGenerator(args, options, config) {
