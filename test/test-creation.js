@@ -30,8 +30,26 @@ describe('appfog generator', function () {
       // add files you expect to exist here.
       'appfog/Procfile',
       'appfog/server.js',
-      ['appfog/distpackage.json', /"name": "testproj"/]
+      ['appfog/distpackage.json', /"name": "testproj"/],
+      ['.gitignore', /^appfog[\/\n]?$/m]
     ];
+
+    // override the system check
+    this.app.checkInstallation = function () {};
+
+    this.app.options['skip-install'] = true;
+    this.app.run({}, function () {
+      helpers.assertFiles(expected);
+      done();
+    });
+  });
+
+  it('update .gitignore file', function (done) {
+    var expected = [
+      ['.gitignore', /^appfog[\/\n]?$/m]
+    ];
+
+    fs.writeFileSync(path.join(this.tmpDir, '.gitignore'), 'somefile');
 
     // override the system check
     this.app.checkInstallation = function () {};
